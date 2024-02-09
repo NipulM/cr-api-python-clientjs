@@ -10,6 +10,7 @@ let overlay = document.querySelector(".overlay");
 spinner.classList.add("visible");
 
 let cards = []; // This array will store the cards that the user has added to the deck
+let cardObjects = []; // This array will store the card objects that the user has added to the deck
 
 async function fetchData() {
   try {
@@ -36,6 +37,9 @@ async function handleData(userRequest) {
         let cardFound = false;
         for (let item of data.items) {
           if (userRequest == item.name.toLowerCase()) {
+            console.log(userRequest);
+            cardObjects.push(item);
+            console.log(cardObjects);
             cards.push(userRequest);
             const addCard = `<div class="card-1">
                                 <div class="image-container">
@@ -60,7 +64,35 @@ async function handleData(userRequest) {
                               </div>`;
 
             // card.insertAdjacentHTML("afterbegin", addCard); // This will add the card to the deck (at the top) - This is the same as the line below
-            card.innerHTML = addCard; // This will add the card to the deck (at the top)
+            // card.innerHTML = addCard + card.innerHTML; // This will add the card to the deck (at the top)
+            // the bellow method will add the card to the deck (at the bottom)
+            card.innerHTML = cardObjects.map((item) => {
+              return `<div class="card-1">
+                                <div class="image-container">
+                                  <img class="image" src="${
+                                    item.iconUrls.evolutionMedium
+                                      ? item.iconUrls.evolutionMedium
+                                      : item.iconUrls.medium
+                                  }" />
+                                </div>
+                                <div class="body-container">
+                                  <p>Card Name: ${item.name}</p>
+                                  <p>Rarity: ${
+                                    item.rarity[0].toUpperCase() +
+                                    item.rarity.slice(1)
+                                  }</p>
+                                  <p>Elixir Cost: ${item.elixirCost}</p>
+                                  <p>Supercell ID: ${item.id}</p>
+                                  <p>Evolution: ${
+                                    item.iconUrls.evolutionMedium ? "YES" : "NO"
+                                  }</p>
+                                </div>
+                              </div>`;
+            });
+
+            if (cards.length == 8) {
+              card.innerHTML = "";
+            }
 
             let imageContainer = card.querySelector(".image-container"); // This will select the image container of the card
 
