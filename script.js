@@ -10,9 +10,6 @@ let overlay = document.querySelector(".overlay");
 spinner.classList.add("visible");
 
 let cards = []; // This array will store the cards that the user has added to the deck
-let cardObjects = []; // This array will store the card objects that the user has added to the deck
-let evolution = []; // This array will store the cards that have an evolution
-let allCards = [];
 async function fetchData() {
   try {
     const response = await fetch("data.json");
@@ -46,103 +43,42 @@ async function handleData(userRequest) {
             cardObjects.push(item);
             console.log(cardObjects);
             cards.push(userRequest);
-            // const addCard = `<div class="card-1">
-            //                     <div class="image-container">
-            //                       <img class="image" src="${
-            //                         item.iconUrls.evolutionMedium
-            //                           ? item.iconUrls.evolutionMedium
-            //                           : item.iconUrls.medium
-            //                       }" />
-            //                     </div>
-            //                     <div class="body-container">
-            //                       <p>Card Name: ${item.name}</p>
-            //                       <p>Rarity: ${
-            //                         item.rarity[0].toUpperCase() +
-            //                         item.rarity.slice(1)
-            //                       }</p>
-            //                       <p>Elixir Cost: ${item.elixirCost}</p>
-            //                       <p>Supercell ID: ${item.id}</p>
-            //                       <p>Evolution: ${
-            //                         item.iconUrls.evolutionMedium ? "YES" : "NO"
-            //                       }</p>
-            //                     </div>
-            //                   </div>`;
+            const addCard = `<div class="card-1">
+                                <div class="image-container">
+                                  <img class="image" src="${
+                                    item.iconUrls.evolutionMedium
+                                      ? item.iconUrls.evolutionMedium
+                                      : item.iconUrls.medium
+                                  }" />
+                                </div>
+                                <div class="body-container">
+                                  <p>Card Name: ${item.name}</p>
+                                  <p>Rarity: ${
+                                    item.rarity[0].toUpperCase() +
+                                    item.rarity.slice(1)
+                                  }</p>
+                                  <p>Elixir Cost: ${item.elixirCost}</p>
+                                  <p>Supercell ID: ${item.id}</p>
+                                  <p>Evolution: ${
+                                    item.iconUrls.evolutionMedium ? "YES" : "NO"
+                                  }</p>
+                                </div>
+                              </div>`;
 
             // card.insertAdjacentHTML("afterbegin", addCard); // This will add the card to the deck (at the top) - This is the same as the line below
-            // card.innerHTML = addCard + card.innerHTML; // This will add the card to the deck (at the top)
-            // the bellow method will add the card to the deck (at the bottom)
-            card.innerHTML = cardObjects.reverse().map((item) => {
-              return `<div class="card-1">
-                                <div class=${
-                                  item.iconUrls.evolutionMedium
-                                    ? "evo item-container"
-                                    : "item-container"
-                                } >
-                                  <img class="image" src="${
-                                    item.iconUrls.evolutionMedium
-                                      ? item.iconUrls.evolutionMedium
-                                      : item.iconUrls.medium
-                                  }" />
-                                </div>
-                                <div class="body-container">
-                                  <p>Card Name: ${item.name}</p>
-                                  <p>Rarity: ${
-                                    item.rarity[0].toUpperCase() +
-                                    item.rarity.slice(1)
-                                  }</p>
-                                  <p>Elixir Cost: ${item.elixirCost}</p>
-                                  <p>Supercell ID: ${item.id}</p>
-                                  <p>Evolution: ${
-                                    item.iconUrls.evolutionMedium ? "YES" : "NO"
-                                  }</p>
-                                </div>
-                              </div>`;
-            });
 
-            if (cards.length == 8) {
-              cardObjects.unshift(...evolution); // This will add the evolution cards to the top of the deck (cardsObject array)
-              console.log(cardObjects);
-              card.innerHTML = "";
-              let uniqueArray = cardObjects.filter(
-                (obj, index, self) =>
-                  index ===
-                  self.findIndex((o) => o.id === obj.id && o.name === obj.name)
-              );
-              console.log(uniqueArray);
-              card.innerHTML = uniqueArray.map((item) => {
-                return `<div class="card-1">
-                                <div class=${
-                                  item.iconUrls.evolutionMedium
-                                    ? "evo item-container"
-                                    : "item-container"
-                                } >
-                                  <img class="image" src="${
-                                    item.iconUrls.evolutionMedium
-                                      ? item.iconUrls.evolutionMedium
-                                      : item.iconUrls.medium
-                                  }" />
-                                </div>
-                                <div class="body-container">
-                                  <p>Card Name: ${item.name}</p>
-                                  <p>Rarity: ${
-                                    item.rarity[0].toUpperCase() +
-                                    item.rarity.slice(1)
-                                  }</p>
-                                  <p>Elixir Cost: ${item.elixirCost}</p>
-                                  <p>Supercell ID: ${item.id}</p>
-                                  <p>Evolution: ${
-                                    item.iconUrls.evolutionMedium ? "YES" : "NO"
-                                  }</p>
-                                </div>
-                              </div>`;
-              });
+            if (item.iconUrls.evolutionMedium) {
+              // This will check if the card has an evolution and add the card to the deck at the top or else at the bottom
+              card.innerHTML = addCard + card.innerHTML;
+            } else {
+              card.innerHTML = card.innerHTML + addCard;
             }
 
             let imageContainer = card.querySelector(".image-container"); // This will select the image container of the card
 
-            // if (item.iconUrls.evolutionMedium) {
-            //   imageContainer.classList.add("evo"); // This will add the class "evo" to the image container of the card if the card has an evolution which will show a glowing border around the card
-            // }
+            if (item.iconUrls.evolutionMedium) {
+              imageContainer.classList.add("evo"); // This will add the class "evo" to the image container of the card if the card has an evolution which will show a glowing border around the card
+            }
 
             cardFound = true;
             break;
