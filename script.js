@@ -54,9 +54,7 @@ async function handleData(userRequest) {
                                   <p>Elixir Cost: ${item.elixirCost}</p>
                                   <p>Supercell ID: ${item.id}</p>
                                   <p>Evolution: ${
-                                    item.iconUrls?.evolutionMedium
-                                      ? "YES"
-                                      : "NO"
+                                    item.iconUrls.evolutionMedium ? "YES" : "NO"
                                   }</p>
                                 </div>
                               </div>`;
