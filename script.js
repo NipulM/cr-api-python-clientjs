@@ -35,13 +35,6 @@ async function handleData(userRequest) {
         let cardFound = false;
         for (let item of data.items) {
           if (userRequest == item.name.toLowerCase()) {
-            if (item.iconUrls.evolutionMedium) {
-              evolution.push(item);
-            }
-            console.log(evolution);
-            console.log(userRequest);
-            cardObjects.push(item);
-            console.log(cardObjects);
             cards.push(userRequest);
             const addCard = `<div class="card-1">
                                 <div class="image-container">
