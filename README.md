@@ -10,7 +10,7 @@ This project leverages the official [Clash Royale API](https://developer.clashro
 
 ## About
 
-This project was created by [Your Name] as part of a blog post series discussing the integration of backend APIs with frontend web development. The blog post detailing this project will be published within the next couple of weeks. Stay tuned for more insights and technical discussions!
+This project is part of a blog post series discussing the integration of backend APIs with frontend web development. The upcoming blog post detailing this project will be published within the next couple of weeks. Stay tuned for more insights and technical discussions!
 
 ## How to Contribute?
 
