@@ -9,13 +9,13 @@ let overlay = document.querySelector(".overlay");
 
 spinner.classList.add("visible");
 
-let cards = [];
+let cards = []; // This array will store the cards that the user has added to the deck
 
 async function fetchData() {
   try {
     const response = await fetch("data.json");
     const data = await response.json();
-    return data;
+    return data; // This is the JSON from the response (will return all the data of cards in the game)
   } catch (error) {
     console.error("Error reading data.json:", error);
     throw error;
@@ -59,12 +59,13 @@ async function handleData(userRequest) {
                                 </div>
                               </div>`;
 
-            card.insertAdjacentHTML("afterbegin", addCard);
+            // card.insertAdjacentHTML("afterbegin", addCard); // This will add the card to the deck (at the top) - This is the same as the line below
+            card.innerHTML = addCard; // This will add the card to the deck (at the top)
 
-            let imageContainer = card.querySelector(".image-container");
+            let imageContainer = card.querySelector(".image-container"); // This will select the image container of the card
 
             if (item.iconUrls.evolutionMedium) {
-              imageContainer.classList.add("evo");
+              imageContainer.classList.add("evo"); // This will add the class "evo" to the image container of the card if the card has an evolution which will show a glowing border around the card
             }
 
             cardFound = true;
@@ -88,7 +89,7 @@ submitBtn.addEventListener("submit", function (event) {
   var userInput = document.getElementById("cardName").value.toLowerCase();
 
   if (cards.includes(userInput)) {
-    alertMessage("The card already exists!");
+    alertMessage("The card already exists in the current deck!");
   } else {
     if (userInput == "") {
       alertMessage("Please enter a valid input :)");
