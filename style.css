@@ -156,6 +156,7 @@ body {
 
 .evo {
   border: 4px solid;
+  border-radius: 15px;
   animation: colorChange 1s infinite;
 }
 
