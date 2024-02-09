@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clash Royale Card Analysis</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap"
+    />
+    <script async src="script.js"></script>
+  </head>
+  <body>
+    <form id="cardForm">
+      <input type="text" id="cardName" placeholder="Enter card name" />
+      <button type="submit" id="submitBtn">&#8594;</button>
+    </form>
+    <form id="cardForm-after">
+      <input type="text" id="cardName-after" placeholder="Enter card name" />
+      <button type="submit" id="submitBtn-after">&#8594;</button>
+    </form>
+    <div class="card-display">
+      <!-- <div class="card-1">
+        <div class="image-container">
+          <img
+            class="image"
+            src="https://api-assets.clashroyale.com/cards/300/X_DQUye_OaS3QN6VC9CPw05Fit7wvSm3XegXIXKP--0.png"
+          />
+        </div>
+        <div class="body-container">
+          <p>Card Name: Goblins</p>
+          <p>Rarity: Common</p>
+          <p>Elixir Cost: 2</p>
+          <p>Supercell ID: 26000002</p>
+          <p>Evolution: YES</p>
+        </div>
+      </div> -->
+    </div>
+    <div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="error-msg opacity">
+      <div class="close-btn">
+        <img class="close-img" src="/images/close.webp" alt="Close button" />
+      </div>
+      <!-- <p>Something went wrong!</p> -->
+    </div>
+    <div class="overlay opacity"></div>
+    <footer>
+      <p>
+        &copy; <span id="currentYear"></span>
+        <a href="https://github.com/NipulM" target="_blank">NipulM</a> | All
+        Rights Reserved.
+      </p>
+    </footer>
+  </body>
+</html>
